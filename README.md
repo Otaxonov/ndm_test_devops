@@ -10,11 +10,7 @@ Client → nginx1 → nginx2 → nginx3 → Flask app
 
 docker-compose up --build
 
-## 2. Check running containers
-
-docker ps
-
-## 3. Access entry point
+## 2. Access entry point
 
 http://localhost:8081
 
