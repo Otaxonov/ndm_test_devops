@@ -1,0 +1,30 @@
+name: NDM_Test_DevOps
+
+services:
+  flask-app:
+    build: ./app
+    expose:
+      - "8080"
+
+  nginx3:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx3.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - flask-app
+
+  nginx2:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx2.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - nginx3
+
+  nginx1:
+    image: nginx:alpine
+    ports:
+      - "8081:80"
+    volumes:
+      - ./nginx/nginx1.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - nginx2
