@@ -1,37 +1,37 @@
-# Architecture
+# Архитектура
 
-Client → nginx1 → nginx2 → nginx3 → Flask app
+Клиент → nginx1 → nginx2 → nginx3 → Flask приложение
 
 ---
 
-# Run
+# Запуск
 
-## 1. Build and start all services
+## 1. Сборка и запуск всех сервисов
 
 docker-compose up --build
 
-## 2. Access entry point
+## 2. Доступ к входной точке
 
 http://localhost:8081
 
 ---
 
-# Testing
+# Тестирование
 
-## Normal request
+## Обычный запрос
 
 curl http://localhost:8081
 
-Expected output:
+Ожидаемый ответ:
 
-X-Forwarded-For: client-ip, nginx1, nginx2, nginx3
+X-Forwarded-For: ip-клиента, nginx1, nginx2, nginx3
 
 ---
 
-## Spoofing attempt
+## Попытка подделки заголовка
 
 curl -H "X-Forwarded-For: 1.1.1.1,2.2.2.2" http://localhost:8081
 
-Expected result:
-- spoofed IP MUST NOT appear
-- only real proxy chain is preserved
+Ожидаемый результат:
+- поддельные IP НЕ должны появиться
+- должна сохраниться только реальная цепочка прокси
